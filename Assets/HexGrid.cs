@@ -14,43 +14,21 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
         tiles = new Dictionary<HexCoordinates, GameObject>();
-
-        //n ringe erzeugen - n = size
-        // pro ring muss ein wert der hex coords = n sein, 
-        // alle anderen müssen alle möglichen variation haben
-
-        // for (int radialStep = 0; radialStep < size; radialStep++)
-        // {
-        //     for (int step = -radialStep * 6; step < radialStep * 6; step++)
-        //     {
-        //         CreateCell(new HexCoordinates(step, 0));
-        //     }
-        // }
-
-        CreateCell(new HexCoordinates(0, 0));
-        for (int x = -size; x <= size; x++)
-        {
-            CreateCell(new HexCoordinates(x, 0));
-        }
-        for (int x = -size; x <= size; x++)
-        {
-            CreateCell(new HexCoordinates(0, x));
-        }
-        for (int x = -size; x <= size; x++)
-        {
-            CreateCell(new HexCoordinates(x, -x));
-        }
+        CreateRing(size);
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     if (tiles.Count == 0) return;
-
-    //     var worldPosition = grid.GetCellCenterWorld(position.ToOffsetCoordinates());
-    //     // Debug.Log($"Grid position: {position} -> World position: {worldPosition}");
-    //     tiles[0].transform.position = worldPosition;
-    // }
+    void CreateRing(int radius)
+    {
+        for (int q = -radius; q <= radius; q++)
+        {
+            int r1 = Mathf.Max(-radius, -q - radius);
+            int r2 = Mathf.Min(radius, -q + radius);
+            for (int r = r1; r <= r2; r++)
+            {
+                CreateCell(new HexCoordinates(q, r));
+            }
+        }
+    }
 
     void CreateCell(HexCoordinates position)
     {
