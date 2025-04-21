@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -8,21 +7,21 @@ public struct HexCoordinates
     [SerializeField]
     private int q, r;
 
-    public int Q
+    public int Q // \
     {
         get
         {
             return q;
         }
     }
-    public int R
+    public int R // -
     {
         get
         {
             return r;
         }
     }
-    public int S
+    public int S // /
     {
         get
         {
@@ -36,22 +35,16 @@ public struct HexCoordinates
         this.r = r;
     }
 
-    public static HexCoordinates FromOffsetCoordinates(int q, int r)
+    public static HexCoordinates FromOffsetCoordinates(int x, int y)
     {
-        return new HexCoordinates(q - r / 2, r);
+        return new HexCoordinates(x - Mathf.FloorToInt((float)y / 2), y);
     }
-
     public Vector3Int ToOffsetCoordinates()
     {
-
-        //Q1|R0|S-1 - Q2|R0|S-2
-
-        int col = R;
-        int row = Q + (R - (R & 1)) / 2; // for odd-q
-        return new Vector3Int(row, col, 0);
+        int x = Q + ((R - (R & 1)) / 2);
+        int y = R;
+        return new Vector3Int(x, y, 0);
     }
-
-
     public override string ToString()
     {
         return $"(Q {Q},R {R},S {S})";
@@ -60,6 +53,8 @@ public struct HexCoordinates
     public string ToStringOnSeparateLines()
     {
         return $"Q:{Q}\nR:{R}\nS:{S}";
+        // Vector3Int offset = ToOffsetCoordinates();
+        // return $"{offset.x};{offset.y}";
     }
 
     public static HexCoordinates FromPosition(Vector3 position)
