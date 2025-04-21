@@ -7,8 +7,8 @@ public class MouseManager : MonoBehaviour
     public HexCoordinates hexCords;
     public Vector3Int gridCoords;
     public Vector3Int offsetCoords;
-    public GameObject hexCell;
     public Grid grid;
+    public HexGrid hexGrid;
 
     void Update()
     {
@@ -28,7 +28,8 @@ public class MouseManager : MonoBehaviour
 
         hexCords = HexCoordinates.FromOffsetCoordinates(gridCoords.x, gridCoords.y);
         offsetCoords = hexCords.ToOffsetCoordinates();
-        hexCell.transform.position = grid.GetCellCenterWorld(offsetCoords);
-        hexCell.GetComponentInChildren<TMP_Text>().text = hexCords.ToStringOnSeparateLines();
+        hexGrid.nextBuilding.transform.SetPositionAndRotation(grid.GetCellCenterWorld(offsetCoords), Quaternion.identity);
+
+        // hexGrid.nextBuilding.GetComponentInChildren<TMP_Text>().text = hexCords.ToStringOnSeparateLines();
     }
 }

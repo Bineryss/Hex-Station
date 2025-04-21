@@ -8,28 +8,31 @@ public class HexGrid : MonoBehaviour
     [SerializeField] private HexCoordinates position;
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private int size = 2;
-    [SerializeField] private List<Sprite> buildings;
+    [SerializeField] private List<GameObject> buildings;
 
     private Dictionary<HexCoordinates, GameObject> tiles;
+    public GameObject nextBuilding;
     void Start()
     {
         tiles = new Dictionary<HexCoordinates, GameObject>();
-        CreateRing(size);
+        nextBuilding = buildings[0];
+        Instantiate(nextBuilding);
+        // CreateRing(size);
     }
 
-    void OnValidate()
-    {
-        if (!Application.isPlaying) return;
-        if (tiles.Count == 0) return;
+    // void OnValidate()
+    // {
+    //     if (!Application.isPlaying) return;
+    //     if (tiles.Count == 0) return;
 
-        foreach (GameObject tile in tiles.Values)
-        {
-            Destroy(tile);
-        }
-        tiles.Clear();
+    //     foreach (GameObject tile in tiles.Values)
+    //     {
+    //         Destroy(tile);
+    //     }
+    //     tiles.Clear();
 
-        CreateRing(size);
-    }
+    //     CreateRing(size);
+    // }
 
     void Update()
     {
@@ -100,22 +103,22 @@ public class HexGrid : MonoBehaviour
             Debug.Log($"Tile alreaddy exists for {position}");
             return;
         }
-        ;
 
         var offsetCoords = position.ToOffsetCoordinates();
         var worldPosition = grid.GetCellCenterWorld(offsetCoords);
         Debug.Log($"Grid position: {position} | {offsetCoords} -> World position: {worldPosition}");
 
-        GameObject tile = Instantiate(tilePrefab, worldPosition, Quaternion.identity);
-        Debug.Log(tile.transform.position);
-        tile.name = $"Hex_{position}";
         int randomIndex = Random.Range(0, buildings.Count);
 
-        tile.GetComponent<SpriteRenderer>().color = color;
 
-        tile.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = buildings[randomIndex];
-        tile.GetComponentInChildren<TMP_Text>().text = position.ToStringOnSeparateLines();
-        //  + "\n" + offsetCoords.ToString();
+        GameObject tile = Instantiate(buildings[randomIndex], worldPosition, Quaternion.identity);
+        tile.name = $"Hex_{position}";
+        nextBuilding = tile;
+
+        // tile.GetComponent<SpriteRenderer>().color = color;
+
+        // tile.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = buildings[randomIndex];
+        // tile.GetComponentInChildren<TMP_Text>().text = position.ToStringOnSeparateLines();
 
         tiles.Add(position, tile);
     }

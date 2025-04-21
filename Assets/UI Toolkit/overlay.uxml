@@ -1,6 +1,7 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: initial;">
         <ui:VisualElement style="flex-grow: 1; flex-direction: row; background-color: rgb(0, 0, 0);">
+            <ui:Label text="Mouse Position:" style="color: rgb(255, 255, 255);" />
             <ui:Label text="x" style="color: rgb(255, 255, 255);" />
             <ui:Label text="," style="color: rgb(255, 255, 255);" />
             <ui:Label text="y" style="color: rgb(255, 255, 255);" />
