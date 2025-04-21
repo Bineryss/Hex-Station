@@ -15,8 +15,7 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
         tiles = new Dictionary<HexCoordinates, GameObject>();
-        nextBuilding = buildings[0];
-        Instantiate(nextBuilding);
+        nextBuilding = Instantiate(buildings[0]);
         // CreateRing(size);
     }
 
