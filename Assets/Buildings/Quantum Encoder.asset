@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9325f3d76d5c9df439fb569a8110a96d, type: 3}
-  m_Name: Base
+  m_Name: Quantum Encoder
   m_EditorClassIdentifier: 
-  label: Station
-  icon: {fileID: -3966044189379602213, guid: 6d248b19c347153448d44213396acdfb, type: 3}
-  shape: {fileID: 11400000, guid: 89fccc38d95dbc5418f6cfbdd9b14769, type: 2}
+  label: Quantum Encoder
+  icon: {fileID: -7029641833743326781, guid: 36d08dff486af3147ac314d9c029c01d, type: 3}
+  shape: {fileID: 11400000, guid: 622fc4d3ef9d5ff4e8a0603fc76971db, type: 2}

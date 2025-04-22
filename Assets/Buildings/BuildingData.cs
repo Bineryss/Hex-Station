@@ -5,7 +5,21 @@ using UnityEngine;
 public class BuildingData : ScriptableObject
 {
     [SerializeField] private string label;
-    [SerializeField] private Sprite sprite;
-    public List<Vector2Int> footprint;
+    [SerializeField] private Sprite icon;
+    [SerializeField] private ShapeData shape;
 
+    public Sprite BuildingIcon
+    {
+        get
+        {
+            return icon;
+        }
+    }
+    public ShapeData Shape
+    {
+        get
+        {
+            return shape;
+        }
+    }
 }

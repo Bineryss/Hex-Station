@@ -15,8 +15,8 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
         tiles = new Dictionary<HexCoordinates, GameObject>();
-        nextBuilding = Instantiate(buildings[0]);
-        // CreateRing(size);
+        nextBuilding = Instantiate(tilePrefab);
+        CreateRing(size);
     }
 
     // void OnValidate()
@@ -110,14 +110,14 @@ public class HexGrid : MonoBehaviour
         int randomIndex = Random.Range(0, buildings.Count);
 
 
-        GameObject tile = Instantiate(buildings[randomIndex], worldPosition, Quaternion.identity);
+        GameObject tile = Instantiate(tilePrefab, worldPosition, Quaternion.identity);
         tile.name = $"Hex_{position}";
         nextBuilding = tile;
 
-        // tile.GetComponent<SpriteRenderer>().color = color;
+        tile.GetComponent<SpriteRenderer>().color = color;
 
         // tile.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = buildings[randomIndex];
-        // tile.GetComponentInChildren<TMP_Text>().text = position.ToStringOnSeparateLines();
+        tile.GetComponentInChildren<TMP_Text>().text = position.ToStringOnSeparateLines();
 
         tiles.Add(position, tile);
     }

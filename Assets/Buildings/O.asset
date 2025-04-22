@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9325f3d76d5c9df439fb569a8110a96d, type: 3}
-  m_Name: Base
+  m_Script: {fileID: 11500000, guid: 3d26539fd43ce8040917d7d7469c67c3, type: 3}
+  m_Name: O
   m_EditorClassIdentifier: 
-  label: Station
-  icon: {fileID: -3966044189379602213, guid: 6d248b19c347153448d44213396acdfb, type: 3}
-  shape: {fileID: 11400000, guid: 89fccc38d95dbc5418f6cfbdd9b14769, type: 2}
+  sprite: {fileID: 9102048340661714696, guid: 8a19153d8609e3e45bd831073dad07e8, type: 3}
+  shapeName: O
+  footprint:
+  - q: 0
+    r: 0
+  spriteOffsetHexagons: {x: 1, y: 2}
