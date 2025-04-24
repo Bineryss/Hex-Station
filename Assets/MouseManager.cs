@@ -7,8 +7,15 @@ public class MouseManager : MonoBehaviour
     public HexCoordinates hexCords;
     public Vector3Int gridCoords;
     public Vector3Int offsetCoords;
-    public Grid grid;
     public HexGrid hexGrid;
+    public GameObject buildingPrefab;
+    public BuildingData buildingData;
+
+    private GameObject building;
+    void Start()
+    {
+        building = InstantiateBuilding();
+    }
 
     void Update()
     {
@@ -24,12 +31,24 @@ public class MouseManager : MonoBehaviour
         mouseWorldPos.z = 0f;
         mouse.x = mouseWorldPos.x;
         mouse.y = mouseWorldPos.y;
-        gridCoords = grid.WorldToCell(mouseWorldPos);
+        hexGrid.MoveElement(mouseWorldPos, building);
 
-        hexCords = HexCoordinates.FromOffsetCoordinates(gridCoords.x, gridCoords.y);
-        offsetCoords = hexCords.ToOffsetCoordinates();
-        hexGrid.nextBuilding.transform.SetPositionAndRotation(grid.GetCellCenterWorld(offsetCoords), Quaternion.identity);
+        if (Input.GetMouseButton(0))
+        {
+            BuildingInit buildingInit = building.GetComponent<BuildingInit>();
 
-        // hexGrid.nextBuilding.GetComponentInChildren<TMP_Text>().text = hexCords.ToStringOnSeparateLines();
+            bool placed = hexGrid.AddElement(mouseWorldPos, buildingInit);
+            if (placed)
+            {
+                building = InstantiateBuilding();
+            }
+        }
+    }
+
+    GameObject InstantiateBuilding()
+    {
+        GameObject instance = Instantiate(buildingPrefab);
+        instance.GetComponent<BuildingInit>().SetData(buildingData);
+        return instance;
     }
 }

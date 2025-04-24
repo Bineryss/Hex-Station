@@ -28,6 +28,10 @@ public struct HexCoordinates
             return -Q - R;
         }
     }
+    public static HexCoordinates operator +(HexCoordinates h1, HexCoordinates h2)
+    {
+        return new HexCoordinates(h1.Q + h2.Q, h1.R + h2.R);
+    }
 
     public HexCoordinates(int q, int r)
     {
@@ -49,43 +53,10 @@ public struct HexCoordinates
     {
         return $"(Q {Q},R {R},S {S})";
     }
-
     public string ToStringOnSeparateLines()
     {
         return $"Q:{Q}\nR:{R}\nS:{S}";
         // Vector3Int offset = ToOffsetCoordinates();
         // return $"{offset.x};{offset.y}";
     }
-
-    // public static HexCoordinates FromPosition(Vector3 position)
-    // {
-    //     float x = position.x / (HexMetrics.innerRadius * 2f);
-    //     float y = -x;
-
-    //     float offset = position.z / (HexMetrics.outerRadius * 3f);
-    //     x -= offset;
-    //     y -= offset;
-
-    //     int iX = Mathf.RoundToInt(x);
-    //     int iY = Mathf.RoundToInt(y);
-    //     int iZ = Mathf.RoundToInt(-x - y);
-
-    //     if (iX + iY + iZ != 0)
-    //     {
-    //         float dX = Mathf.Abs(x - iX);
-    //         float dY = Mathf.Abs(y - iY);
-    //         float dZ = Mathf.Abs(-x - y - iZ);
-
-    //         if (dX > dY && dX > dZ)
-    //         {
-    //             iX = -iY - iZ;
-    //         }
-    //         else if (dZ > dY)
-    //         {
-    //             iZ = -iX - iY;
-    //         }
-    //     }
-
-    //     return new HexCoordinates(iX, iZ);
-    // }
 }

@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingInit : MonoBehaviour
@@ -10,14 +10,23 @@ public class BuildingInit : MonoBehaviour
 
     void Start()
     {
+        if (data == null) return;
+
         icon.GetComponent<SpriteRenderer>().sprite = data.BuildingIcon;
         footprint.GetComponent<SpriteRenderer>().sprite = data.Shape.Sprite;
         footprint.transform.SetPositionAndRotation(data.Shape.Position, Quaternion.identity);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetData(BuildingData data)
     {
+        this.data = data;
+        icon.GetComponent<SpriteRenderer>().sprite = data.BuildingIcon;
+        footprint.GetComponent<SpriteRenderer>().sprite = data.Shape.Sprite;
+        footprint.transform.SetPositionAndRotation(data.Shape.Position, Quaternion.identity);
+    }
 
+    public List<HexCoordinates> GetFootprint()
+    {
+        return data.Shape.Footprint;
     }
 }
