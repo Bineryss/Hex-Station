@@ -1,12 +1,10 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MouseManager : MonoBehaviour
 {
     public Vector2 mouse = new Vector2(0, 0);
-    public HexCoordinates hexCords;
-    public Vector3Int gridCoords;
-    public Vector3Int offsetCoords;
     public HexGrid hexGrid;
     public GameObject buildingPrefab;
     public BuildingData buildingData;
@@ -32,17 +30,24 @@ public class MouseManager : MonoBehaviour
         mouse.x = mouseWorldPos.x;
         mouse.y = mouseWorldPos.y;
         hexGrid.MoveElement(mouseWorldPos, building);
+    }
 
-        if (Input.GetMouseButton(0))
+
+    public void PlaceBuilding()
+    {
+        bool placed = hexGrid.AddElement(mouse, building.GetComponent<BuildingInit>());
+        if (placed)
         {
-            BuildingInit buildingInit = building.GetComponent<BuildingInit>();
-
-            bool placed = hexGrid.AddElement(mouseWorldPos, buildingInit);
-            if (placed)
-            {
-                building = InstantiateBuilding();
-            }
+            building = InstantiateBuilding();
         }
+    }
+
+    public void RotateBuilding(InputAction.CallbackContext context)
+    {
+        // if (!context.started) return;
+
+        Debug.Log("clicked rotate");
+        // building.GetComponent<BuildingInit>().RotateClockwise();
     }
 
     GameObject InstantiateBuilding()

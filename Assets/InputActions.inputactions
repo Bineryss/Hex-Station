@@ -1,0 +1,54 @@
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "building",
+            "id": "1ae61fe9-3e7f-4ca1-9c66-6d4bc1fea5ec",
+            "actions": [
+                {
+                    "name": "place",
+                    "type": "Button",
+                    "id": "7c70a801-2ad0-4e76-91d3-2a067d1b0ec6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "rotate-cw",
+                    "type": "Button",
+                    "id": "68c38af5-a832-4883-b712-494279d724ea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fdfc21cf-a8a7-4ff3-9cc9-664093d67225",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "place",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d41dc05-ae93-4376-b8f7-87bfb46d5906",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "rotate-cw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -14,5 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 7197976124140560818, guid: 8a19153d8609e3e45bd831073dad07e8, type: 3}
   shapeName: C
-  footprint: []
+  footprint:
+  - q: 0
+    r: 0
+  - q: -1
+    r: 1
+  - q: -1
+    r: 0
+  - q: 0
+    r: -1
+  - q: 1
+    r: -1
   spriteOffsetHexagons: {x: 3, y: 5}

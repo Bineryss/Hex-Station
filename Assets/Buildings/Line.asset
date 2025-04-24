@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d26539fd43ce8040917d7d7469c67c3, type: 3}
-  m_Name: T
+  m_Name: Line
   m_EditorClassIdentifier: 
-  sprite: {fileID: -6693372186767644156, guid: 8a19153d8609e3e45bd831073dad07e8, type: 3}
-  shapeName: T
+  sprite: {fileID: 8197587046380588953, guid: 8a19153d8609e3e45bd831073dad07e8, type: 3}
+  shapeName: Line
   footprint:
   - q: 0
     r: 0
-  - q: 0
-    r: 1
   - q: -1
-    r: 1
-  spriteOffsetHexagons: {x: 2, y: 2}
+    r: 0
+  - q: 1
+    r: 0
+  spriteOffsetHexagons: {x: 3, y: 2}

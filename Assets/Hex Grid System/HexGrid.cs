@@ -24,9 +24,9 @@ public class HexGrid : MonoBehaviour
 
     void DrawHexBackground()
     {
-        foreach (GameObject gO in background.Values)
+        foreach (GameObject goo in background.Values)
         {
-            Destroy(gO);
+            Destroy(goo);
         }
         background.Clear();
 
