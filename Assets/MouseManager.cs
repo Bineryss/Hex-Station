@@ -33,8 +33,10 @@ public class MouseManager : MonoBehaviour
     }
 
 
-    public void PlaceBuilding()
+    public void PlaceBuilding(InputAction.CallbackContext context)
     {
+        if (!context.started) return;
+        Debug.Log("placing building");
         bool placed = hexGrid.AddElement(mouse, building.GetComponent<BuildingInit>());
         if (placed)
         {

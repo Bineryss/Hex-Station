@@ -9,11 +9,10 @@ public class HexGrid : MonoBehaviour
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private int radius = 2;
 
-    private Dictionary<HexCoordinates, BuildingInit> tiles;
+    private readonly Dictionary<HexCoordinates, BuildingInit> tiles = new();
     private readonly Dictionary<HexCoordinates, GameObject> background = new();
     void Start()
     {
-        tiles = new Dictionary<HexCoordinates, BuildingInit>(new MyKeyComparer());
         // CreateRing(size);
     }
 
@@ -123,7 +122,6 @@ public class HexGrid : MonoBehaviour
         Vector3Int offsetCoord = grid.WorldToCell(position);
         HexCoordinates offsetHex = HexCoordinates.FromOffsetCoordinates(offsetCoord.x, offsetCoord.y);
         HexCoordinates calculatedOffset = offset + offsetHex;
-        Debug.Log($"offset for position:{position} and offset:{offset} at {calculatedOffset}");
         return calculatedOffset;
     }
 
@@ -132,20 +130,5 @@ public class HexGrid : MonoBehaviour
         Vector3Int offsetCoord = grid.WorldToCell(target);
         Vector3 coord = grid.CellToWorld(offsetCoord);
         element.transform.position = coord;
-    }
-}
-
-public class MyKeyComparer : IEqualityComparer<HexCoordinates>
-{
-    public bool Equals(HexCoordinates x, HexCoordinates y)
-    {
-        // Compare based on a property, e.g., x.Id == y.Id
-        return x.Q == y.Q && x.R == y.R;
-    }
-
-    public int GetHashCode(HexCoordinates obj)
-    {
-        // Use the same property for hash code
-        return (obj.Q, obj.R).GetHashCode();
     }
 }

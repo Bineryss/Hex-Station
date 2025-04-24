@@ -28,15 +28,28 @@ public class BuildingInit : MonoBehaviour
 
     public List<HexCoordinates> GetFootprint()
     {
-        return data.Shape.Footprint;
+        List<HexCoordinates> coords = data.Shape.Footprint;
+        List<HexCoordinates> rotatetCords = new();
+
+        foreach (HexCoordinates coord in coords)
+        {
+            HexCoordinates rotatetCord = coord;
+            for (int i = 0; i < rotation; i++)
+            {
+                rotatetCord = rotatetCord.Rotate();
+            }
+            rotatetCords.Add(rotatetCord);
+        }
+
+        return rotatetCords;
     }
 
     public void RotateClockwise()
     {
-        rotation += 60;
-        rotation %= 360;
-        // Debug.Log($"rotate to {rotation}");
-        transform.rotation = Quaternion.AngleAxis(-rotation, Vector3.forward);
-        icon.transform.localRotation = Quaternion.AngleAxis(rotation, Vector3.forward);
+        rotation++;
+        rotation %= 6;
+        Debug.Log($"rotate to {rotation * 60}");
+        transform.rotation = Quaternion.AngleAxis(-rotation * 60, Vector3.forward);
+        icon.transform.localRotation = Quaternion.AngleAxis(rotation * 60, Vector3.forward);
     }
 }
