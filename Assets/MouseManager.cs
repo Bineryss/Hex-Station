@@ -44,10 +44,9 @@ public class MouseManager : MonoBehaviour
 
     public void RotateBuilding(InputAction.CallbackContext context)
     {
-        // if (!context.started) return;
+        if (!context.started) return;
 
-        Debug.Log("clicked rotate");
-        // building.GetComponent<BuildingInit>().RotateClockwise();
+        building.GetComponent<BuildingInit>().RotateClockwise();
     }
 
     GameObject InstantiateBuilding()

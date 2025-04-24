@@ -15,7 +15,7 @@ public class BuildingInit : MonoBehaviour
 
         icon.GetComponent<SpriteRenderer>().sprite = data.BuildingIcon;
         footprint.GetComponent<SpriteRenderer>().sprite = data.Shape.Sprite;
-        footprint.transform.localPosition= data.Shape.Position;
+        footprint.transform.localPosition = data.Shape.Position;
     }
 
     public void SetData(BuildingData data)
@@ -35,8 +35,8 @@ public class BuildingInit : MonoBehaviour
     {
         rotation += 60;
         rotation %= 360;
-        Debug.Log($"rotate to {rotation}");
-        transform.Rotate(new Vector3(0, 0, 1) * rotation);
-        icon.transform.Rotate(new Vector3(0, 0, -1) * rotation);
+        // Debug.Log($"rotate to {rotation}");
+        transform.rotation = Quaternion.AngleAxis(-rotation, Vector3.forward);
+        icon.transform.localRotation = Quaternion.AngleAxis(rotation, Vector3.forward);
     }
 }

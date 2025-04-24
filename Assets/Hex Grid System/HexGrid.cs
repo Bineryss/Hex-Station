@@ -24,12 +24,6 @@ public class HexGrid : MonoBehaviour
 
     void DrawHexBackground()
     {
-        foreach (GameObject goo in background.Values)
-        {
-            Destroy(goo);
-        }
-        background.Clear();
-
         for (int q = -radius; q <= radius; q++)
         {
             int r1 = Mathf.Max(-radius, -q - radius);
@@ -64,17 +58,21 @@ public class HexGrid : MonoBehaviour
 
     void CreateCell(HexCoordinates position, Color color)
     {
-        if (background.ContainsKey(position))
-        {
-            Debug.Log($"Tile already exists for {position}");
-            return;
-        }
-
         var offsetCoords = position.ToOffsetCoordinates();
         var worldPosition = grid.GetCellCenterWorld(offsetCoords);
         worldPosition += new Vector3(0, 0, -1);
+        GameObject tile;
+        if (background.ContainsKey(position))
+        {
+            tile = background[position];
+        }
+        else
+        {
+            tile = Instantiate(tilePrefab, worldPosition, Quaternion.identity);
+            background.Add(position, tile);
+        }
 
-        GameObject tile = Instantiate(tilePrefab, worldPosition, Quaternion.identity);
+
         tile.name = $"Hex_{position}";
 
         tile.GetComponent<SpriteRenderer>().color = color;
@@ -87,7 +85,6 @@ public class HexGrid : MonoBehaviour
             text.color = new Color(1f, 0f, 0f, 0.5f);
         }
 
-        background.Add(position, tile);
     }
 
     public bool AddElement(Vector3 target, BuildingInit element)
@@ -117,7 +114,7 @@ public class HexGrid : MonoBehaviour
         Vector3Int offsetCoords = grid.WorldToCell(target);
         Vector3 worldPosition = grid.GetCellCenterWorld(offsetCoords);
 
-        element.transform.SetPositionAndRotation(worldPosition, Quaternion.identity);
+        element.transform.position = worldPosition;
         return true;
     }
 
@@ -134,7 +131,7 @@ public class HexGrid : MonoBehaviour
     {
         Vector3Int offsetCoord = grid.WorldToCell(target);
         Vector3 coord = grid.CellToWorld(offsetCoord);
-        element.transform.SetPositionAndRotation(coord, Quaternion.identity);
+        element.transform.position = coord;
     }
 }
 
