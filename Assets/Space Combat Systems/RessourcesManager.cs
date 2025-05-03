@@ -10,6 +10,20 @@ public class RessourcesManager : MonoBehaviour
     [SerializeField] private UIDocument root;
 
     private Label hex;
+
+    public static RessourcesManager Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         hex = root.rootVisualElement.Q<Label>("hex");

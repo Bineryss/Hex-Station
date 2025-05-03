@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7852840703066716738}
   - component: {fileID: 4633531448486866146}
   - component: {fileID: -1987861047221696126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423402d368707494cbdae5418ebbb598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 25
 --- !u!50 &-1987861047221696126
 Rigidbody2D:
   serializedVersion: 5

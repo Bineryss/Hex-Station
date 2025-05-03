@@ -18,6 +18,8 @@ public class Health : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag != "damage") return;
+
         health = Math.Max(0, health - 10);
         label.text = health.ToString();
 
