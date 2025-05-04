@@ -21,6 +21,7 @@ public class Spawner : MonoBehaviour
 
         left = Camera.main.transform.position.x - camWidth / 2;
         right = Camera.main.transform.position.x + camWidth / 2;
+        StartWave(0);
     }
 
     void Update()
@@ -30,7 +31,12 @@ public class Spawner : MonoBehaviour
 
         waveTimer = 0;
         wave++;
-        int enemyCount = Math.Max(maxEnemys, UnityEngine.Random.Range(0, wave) * waveMultiplyer);
+        StartWave(wave);
+    }
+
+    void StartWave(int wave)
+    {
+        int enemyCount = Math.Min(maxEnemys, UnityEngine.Random.Range(0, wave) * waveMultiplyer);
 
         for (int i = 0; i < enemyCount; i++)
         {

@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.tag);
         if (collision.tag != "damage") return;
 
         health = Math.Max(0, health - 10);

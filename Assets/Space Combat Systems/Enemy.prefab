@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 4930374093558289914}
-  health: 1
+  health: 50
   OnDestroyed:
     m_PersistentCalls:
       m_Calls:
@@ -413,7 +413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ae0ca321e66964eac7fc24fa0e2371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  moveSpeed: 3
+  patrolPointRadius: 2
+  spawnOffset: 1
   rb: {fileID: 5287307142937920459}
 --- !u!1001 &4322123368460711696
 PrefabInstance:
@@ -423,6 +425,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4890689573344218202}
     m_Modifications:
+    - target: {fileID: 1775444663479137356, guid: 8650e6b9365d37f47b1527814e5b99cc, type: 3}
+      propertyPath: random
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775444663479137356, guid: 8650e6b9365d37f47b1527814e5b99cc, type: 3}
+      propertyPath: cooldown
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3367388528020452585, guid: 8650e6b9365d37f47b1527814e5b99cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.52
@@ -485,6 +495,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4890689573344218202}
     m_Modifications:
+    - target: {fileID: 1775444663479137356, guid: 8650e6b9365d37f47b1527814e5b99cc, type: 3}
+      propertyPath: random
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775444663479137356, guid: 8650e6b9365d37f47b1527814e5b99cc, type: 3}
+      propertyPath: cooldown
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3367388528020452585, guid: 8650e6b9365d37f47b1527814e5b99cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.515

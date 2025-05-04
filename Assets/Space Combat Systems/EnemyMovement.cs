@@ -1,45 +1,68 @@
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class TopEnemyController : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private Rigidbody2D rb;
+    [Header("Movement")]
+    public float moveSpeed = 3f;
+    public float patrolPointRadius = 2f; // How close to get before new point
+    public float spawnOffset = 1f; // Spawn above screen
 
-    private float right;
-    private float left;
-    private float spriteHalfWidth;
-    private int direction = 1; // 1 = right, -1 = left
+    [Header("References")]
+    public Rigidbody2D rb;
+    private Vector2 currentPatrolPoint;
+    private bool hasSpawned = false;
 
+    // Screen bounds for top half
+    private float minX;
+    private float maxX;
+    private float minY;
+    private float maxY;
 
     void Start()
     {
-        float camHeight = Camera.main.orthographicSize * 2f;
-        float camWidth = camHeight * Camera.main.aspect;
+        CalculateTopHalfBounds();
+        SetNewRandomPatrolPoint();
+    }
 
-        left = Camera.main.transform.position.x - camWidth / 2;
-        right = Camera.main.transform.position.x + camWidth / 2;
+    void CalculateTopHalfBounds()
+    {
+        Camera cam = Camera.main;
+        float camHeight = cam.orthographicSize;
+        float camWidth = camHeight * cam.aspect;
 
-        // Get half-width of sprite for accurate edge detection
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        spriteHalfWidth = sr != null ? sr.bounds.size.x / 2f : 0f;
+        // Top half bounds (screen center to top)
+        minX = -camWidth;
+        maxX = camWidth;
+        minY = 0; // Screen center
+        maxY = camHeight;
+    }
+
+    void SetNewRandomPatrolPoint()
+    {
+        currentPatrolPoint = new Vector2(
+            Random.Range(minX + 1f, maxX - 1f), // Keep within X bounds
+            Random.Range(minY + 1f, maxY - 1f)  // Keep within top half Y
+        );
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
+        Vector2 direction = (currentPatrolPoint - rb.position).normalized;
+        rb.linearVelocity = direction * moveSpeed;
 
-        // Check if enemy is at or beyond camera edge
-        float leftEdge = transform.position.x - spriteHalfWidth;
-        float rightEdge = transform.position.x + spriteHalfWidth;
-
-        if (rightEdge > right)
+        // Check distance to patrol point
+        if (Vector2.Distance(rb.position, currentPatrolPoint) < patrolPointRadius)
         {
-            direction = -1;
-        }
-        else if (leftEdge < left)
-        {
-            direction = 1;
+            SetNewRandomPatrolPoint();
         }
     }
 
+    void OnDrawGizmos()
+    {
+        // Visualize patrol area in Scene view
+        Gizmos.color = Color.yellow;
+        Vector3 center = new Vector3((minX + maxX)/2, (minY + maxY)/2, 0);
+        Vector3 size = new Vector3(maxX - minX, maxY - minY, 0);
+        Gizmos.DrawWireCube(center, size);
+    }
 }
